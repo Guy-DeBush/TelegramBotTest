@@ -1,5 +1,7 @@
 import telebot
-import types
+from telebot import types
+import random
+
 
 
 bot = telebot.TeleBot('6523416756:AAHOOrzXq35PnIX07vv0j3Shj1PZMnliOp8')
@@ -8,30 +10,26 @@ bot = telebot.TeleBot('6523416756:AAHOOrzXq35PnIX07vv0j3Shj1PZMnliOp8')
 def start(message):
 
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn1 = types.KeyboardButton("👋 Поздороваться")
+    btn1 = types.KeyboardButton("Начинай,Данечка")
     markup.add(btn1)
-    bot.send_message(message.from_user.id, "👋 Привет! Я твой бот-помошник!", reply_markup=markup)
+    bot.send_message(message.from_user.id, "Привет! Я заебался,но вроде сделал!", reply_markup=markup)
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
 
-    if message.text == '👋 Поздороваться':
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True) #создание новых кнопок
-        btn1 = types.KeyboardButton('Как стать автором на Хабре?')
-        btn2 = types.KeyboardButton('Правила сайта')
-        btn3 = types.KeyboardButton('Советы по оформлению публикации')
-        markup.add(btn1, btn2, btn3)
-        bot.send_message(message.from_user.id, '❓ Задайте интересующий вас вопрос', reply_markup=markup) #ответ бота
+    if message.text == 'Начинай,Данечка':
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True) #создание кнопочки
+        btn1 = types.KeyboardButton('Игра')
+        markup.add(btn1)
+        bot.send_message(message.from_user.id, 'Бот загадал число от 1 до 10', reply_markup=markup) #ответ бота
+        Game_answer = message.text
+        Bot_number = random.randint(1,10)
+        if Game_answer == Bot_number:
+            bot.send_message(message.from_user,"Угадал!", reply_markup=markup )
+        else:
+            bot.send_message(message.from_user,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!", reply_markup=markup)
 
 
-    elif message.text == 'Как стать автором на Хабре?':
-        bot.send_message(message.from_user.id, 'Вы пишете первый пост, его проверяют модераторы, и, если всё хорошо, отправляют в основную ленту Хабра, где он набирает просмотры, комментарии и рейтинг. В дальнейшем премодерация уже не понадобится. Если с постом что-то не так, вас попросят его доработать.\n \nПолный текст можно прочитать по ' + '[ссылке](https://habr.com/ru/sandbox/start/)', parse_mode='Markdown')
-
-    elif message.text == 'Правила сайта':
-        bot.send_message(message.from_user.id, 'Прочитать правила сайта вы можете по ' + '[ссылке](https://habr.com/ru/docs/help/rules/)', parse_mode='Markdown')
-
-    elif message.text == 'Советы по оформлению публикации':
-        bot.send_message(message.from_user.id, 'Подробно про советы по оформлению публикаций прочитать по ' + '[ссылке](https://habr.com/ru/docs/companies/design/)', parse_mode='Markdown')
 
 
-bot.polling(none_stop=True, interval=0) #обязательная для работы бота часть
+bot.polling(none_stop=True, interval=0)

@@ -22,8 +22,8 @@ def get_text_messages(message):
         Game_answer = message.text
         Bot_number = random.randint(1,10)
         if Game_answer == Bot_number:
-            bot.send_message(message.from_user,"Угадал!")
+            bot.send_message(message.from_user.id,"Угадал!")
         else:
-            bot.send_message(message.from_user,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!")
+            bot.send_message(message.from_user.id,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!")
 
 bot.polling(none_stop=True, interval=0)

@@ -1,5 +1,5 @@
 import telebot
-import telebot import types
+import types
 
 
 bot = telebot.TeleBot('6523416756:AAHOOrzXq35PnIX07vv0j3Shj1PZMnliOp8')

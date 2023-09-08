@@ -14,7 +14,7 @@ def start(message):
     markup.add(btn1)
     bot.send_message(message.from_user.id, "Привет! Я заебался,но вроде сделал!", reply_markup=markup)
 
-@bot.message_handler(content_types=['text'])
+@bot.message_handler(commands=['randnumber'])
 def get_text_messages(message):
 
     if message.text == 'Кнопочка для игры':

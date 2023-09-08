@@ -18,16 +18,12 @@ def start(message):
 def get_text_messages(message):
 
     if message.text == 'Кнопочка для игры':
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True) #создание кнопочки
-        bot.send_message(message.from_user.id, 'Бот загадал число от 1 до 10, угадывай!', reply_markup=markup) #ответ бота
+        bot.send_message(message.from_user.id, 'Бот загадал число от 1 до 10, угадывай!') #ответ бота
         Game_answer = message.text
         Bot_number = random.randint(1,10)
         if Game_answer == Bot_number:
-            bot.send_message(message.from_user,"Угадал!", reply_markup=markup )
+            bot.send_message(message.from_user,"Угадал!")
         else:
-            bot.send_message(message.from_user,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!", reply_markup=markup)
-
-
-
+            bot.send_message(message.from_user,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!")
 
 bot.polling(none_stop=True, interval=0)

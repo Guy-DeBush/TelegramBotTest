@@ -18,10 +18,8 @@ def start(message):
 def get_text_messages(message):
     if message.text == 'Кнопочка для игры':
         bot.send_message(message.from_user.id, 'Бот загадал число от 1 до 10, угадывай!') #ответ бота
-        User_answer = message.text
-        YourNum = bot.send_message(User_answer, 'Твоё число:')
         Bot_number = random.randint(1,10)
-        if YourNum == Bot_number:
+        if message.text == Bot_number:
             bot.send_message(message.from_user.id,"Угадал!")
         else:
             bot.send_message(message.from_user.id,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!")

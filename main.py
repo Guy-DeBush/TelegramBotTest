@@ -20,11 +20,15 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, 'Бот загадал число от 1 до 10, угадывай!') #ответ бота
         User_answer = message.chat.id
         YourNum = bot.send_message(User_answer, 'Твоё число:')
-        bot.register_next_step_handler(YourNum)
+        bot.register_next_step_handler(YourNum, step_Set_Price)
         Bot_number = random.randint(1,10)
         if YourNum == Bot_number:
             bot.send_message(message.from_user.id,"Угадал!")
         else:
             bot.send_message(message.from_user.id,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!")
+
+def step_Set_Price(message):
+    User_answer = message.chat.id
+    userPrice= message.text
 
 bot.polling(none_stop=True, interval=0)

@@ -16,12 +16,13 @@ def start(message):
 
 @bot.message_handler(commands=['randnumber'])
 def get_text_messages(message):
-
     if message.text == 'Кнопочка для игры':
         bot.send_message(message.from_user.id, 'Бот загадал число от 1 до 10, угадывай!') #ответ бота
-        Game_answer = message.text
+        User_answer = message.chat.id
+        YourNum = bot.send_message(User_answer, 'Твоё число:')
+        bot.register_next_step_handler(YourNum)
         Bot_number = random.randint(1,10)
-        if Game_answer == Bot_number:
+        if YourNum == Bot_number:
             bot.send_message(message.from_user.id,"Угадал!")
         else:
             bot.send_message(message.from_user.id,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!")

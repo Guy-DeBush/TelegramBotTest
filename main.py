@@ -13,7 +13,7 @@ def start(message):
 def text_handler(message):
     User_answer = message.text.lower()
     chat_id = message.chat.id
-    Bot_number = random.randint(1, 10)
+    Bot_number = str(random.randint(1, 10))
     bot.send_message(chat_id, f'Загаданное число: {Bot_number}')
     bot.send_message(chat_id, f'Число игрока: {User_answer}')
     if User_answer == Bot_number:

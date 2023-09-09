@@ -14,13 +14,12 @@ def start(message):
     markup.add(btn1)
     bot.send_message(message.from_user.id, "Привет! Я заебался,но вроде сделал!", reply_markup=markup)
 
-@bot.message_handler(content_types=['text'])
+@bot.message_handler(commands=['game'])
 def get_text_messages(message):
     if message.text == 'Кнопочка для игры':
         bot.send_message(message.from_user.id, 'Бот загадал число от 1 до 10, угадывай!') #ответ бота
         User_answer = message.text
         bot.register_next_step_handler(User_answer, test)
-
 
 def test(message):
     Bot_number = random.randint(1,10)

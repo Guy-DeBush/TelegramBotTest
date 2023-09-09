@@ -18,11 +18,17 @@ def start(message):
 def get_text_messages(message):
     if message.text == 'Кнопочка для игры':
         bot.send_message(message.from_user.id, 'Бот загадал число от 1 до 10, угадывай!') #ответ бота
-        Bot_number = random.randint(1,10)
-        if message.text == Bot_number:
-            bot.send_message(message.from_user.id,"Угадал!")
-        else:
-            bot.send_message(message.from_user.id,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!")
+        User_answer = message.text
+        bot.register_next_step_handler(User_answer, test)
 
 
-bot.polling(none_stop=True, interval=0)
+def test(message):
+    Bot_number = random.randint(1,10)
+    if message.text == Bot_number:
+        bot.send_message(message.from_user.id,"Угадал!")
+    else:
+        bot.send_message(message.from_user.id,"ЛОХ! ПОПУСК! НЕ УГАДАЛ!")
+
+
+bot.polling(none_stop=True, interval=0) #Можно написать и инфинити поллинг, но бля так саснее
+
